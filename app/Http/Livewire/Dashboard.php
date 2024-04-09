@@ -98,7 +98,11 @@ class Dashboard extends Component
             "emailAdmin" => session('userAdmin')->email
         ]);
 
-        $this->doors = json_decode($responseDoors->body());
+        if ($responseDoors->successful()) {
+            $this->doors = json_decode($responseDoors->body());
+        } else {
+            $this->doors = [];
+        }
 
         return view('livewire.dashboard');
     }

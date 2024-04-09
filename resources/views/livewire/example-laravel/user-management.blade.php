@@ -30,12 +30,14 @@
                             </div>
                             <br>
                             @foreach ($doors as $door)
+                            @if(isset($door->status))
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" value="{{ $door->_id }}" id="flexCheckDefault">
                                 <label class="form-check-label" for="flexCheckDefault">
                                     {{ $loop->index+1 }}
                                 </label>
                             </div>
+                            @endif
                             @endforeach
                         </div>
                         <div class="modal-footer">

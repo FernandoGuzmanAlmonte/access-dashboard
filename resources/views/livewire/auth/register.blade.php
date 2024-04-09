@@ -19,7 +19,7 @@
                                         <p class="mb-0">Ingresa tu nombre, correo electrónico y contraseña</p>
                                     </div>
                                     <div class="card-body">
-                                        <form wire:submit.prevent ="store">
+                                        <form wire:submit.prevent="store">
 
                                             <div class="input-group input-group-outline @if(strlen($name?? '') > 0) is-filled @endif">
                                                 <label class="form-label">Nombre completo</label>
@@ -56,7 +56,8 @@
                                             </div>
                                             <div class="text-center">
                                                 <button type="submit"
-                                                    class="btn btn-lg bg-gradient-success btn-lg w-100 mt-4 mb-0"style="background-image: linear-gradient(195deg, #000 0%, #43A047 100%);">Crear cuenta</button>
+                                                    class="btn btn-lg bg-gradient-success btn-lg w-100 mt-4 mb-0"
+                                                    style="background-image: linear-gradient(195deg, #000 0%, #43A047 100%);">Crear cuenta</button>
                                             </div>
                                         </form>
                                     </div>
@@ -64,7 +65,7 @@
                                         <p class="mb-2 text-sm mx-auto">
                                             ¿Ya tienes una cuenta?
                                             <a href="{{ route('login') }}"
-                                                class="text-success text-gradient font-weight-bold"style="background-image: linear-gradient(195deg, #000 0%, #43A047 100%);">Iniciar sesión</a>
+                                                class="text-success text-gradient font-weight-bold" style="background-image: linear-gradient(195deg, #000 0%, #43A047 100%);">Iniciar sesión</a>
                                         </p>
                                     </div>
                                 </div>

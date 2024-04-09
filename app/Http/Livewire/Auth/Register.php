@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Auth;
 
 use App\Models\User;
+use Illuminate\Support\Facades\Http;
 use Livewire\Component;
 
 class Register extends Component
@@ -13,20 +14,30 @@ class Register extends Component
     public $password = '';
 
     protected $rules=[
-    'name' => 'required|min:3',
-    'email' => 'required|email|unique:users,email',
-    'password' => 'required|min:5',];
+        'email' => 'required|email',
+        'password' => 'required'
+    ];
 
 
     public function store(){
 
-        $attributes = $this->validate();
+        $host = env("MOBILE_API_HOST", "http://localhost:3000");
 
-        $user = User::create($attributes);
-
-        auth()->login($user);
+        $responseUserAdmin = Http::post($host . '/api/registerAdmin', [
+            'username' => $this->name,
+            'email' => $this->email,
+            'password' => $this->password,
+        ]);
         
-        return redirect('/dashboard');
+
+        if ($responseUserAdmin->successful()) {
+            $userAdmin = json_decode($responseUserAdmin->body());
+            session(['userAdmin' => $userAdmin]);
+
+            return redirect('/dashboard');
+        } else {
+            session()->flash('error', 'Hubo un problema con el registro.');
+        }
     } 
 
     public function render()

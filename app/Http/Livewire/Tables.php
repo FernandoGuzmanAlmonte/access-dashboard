@@ -18,11 +18,15 @@ class Tables extends Component
             "emailAdmin" => session('userAdmin')->email
         ]);
 
-        $this->movimientos = json_decode($response->body());
-
-        foreach ($this->movimientos as $movimiento) {
-            $date = Carbon::parse($movimiento->fecha);
-            $movimiento->fecha = $date->tz('America/Mexico_City')->format('Y-m-d H:i:s');
+        if ($response->successful() ) {
+            $this->movimientos = json_decode($response->body());
+            
+            foreach ($this->movimientos as $movimiento) {
+                $date = Carbon::parse($movimiento->fecha);
+                $movimiento->fecha = $date->tz('America/Mexico_City')->format('Y-m-d H:i:s');
+            }
+        } else {
+            $this->movimientos = [];
         }
 
         return view('livewire.tables');

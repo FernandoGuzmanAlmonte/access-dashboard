@@ -59,10 +59,15 @@ class UserManagement extends Component
         ]);
         $this->users = json_decode($responseUsers->body());
 
+        
         $responseDoors = Http::get($host . '/api/puertas', [
             "emailAdmin" => session('userAdmin')->email
         ]);
-        $this->doors = json_decode($responseDoors->body());
+        if ($responseDoors->successful()) {
+            $this->doors = json_decode($responseDoors->body());
+        } else {
+            $this->doors = [];
+        }
 
         return view('livewire.example-laravel.user-management');
     }
